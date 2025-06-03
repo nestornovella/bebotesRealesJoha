@@ -7,7 +7,7 @@ export async function DELETE(
     { params } 
 ) {
     try {
-        const { id } = params;
+        const { id } = params; 
 
         if (!id) throw new Error("Se requiere un ID para eliminar el producto");
 
