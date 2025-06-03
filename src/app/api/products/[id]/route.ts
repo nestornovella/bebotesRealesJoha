@@ -11,7 +11,7 @@ export async function DELETE(
 
         if (!id) throw new Error("Se requiere un ID para eliminar el producto");
 
-        const deleted = await prismaClient.product.delete({
+        await prismaClient.product.delete({
             where: { id },
         });
 
