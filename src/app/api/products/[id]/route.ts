@@ -4,7 +4,7 @@ import { prismaClient } from "../../helpers/prismaClient";
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params } 
 ) {
     try {
         const { id } = params;
