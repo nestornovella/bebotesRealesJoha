@@ -9,7 +9,7 @@ export function Input({ label, type = 'text', name, value = '', handler }) {
     return (
         <div className="flex flex-col g ">
             <label className={`${Styles.label} text-sm translate-y-2.5 bg-white w-fit px-1 py-0 ml-2 font-bold text-gray-500`} htmlFor="">{label}</label>
-            <input className={`${Styles.input} border rounded p-[4.8px] text-xs text-gray-600 font-semibold`} onChange={handler} value={value} name={name} type={type} />
+            <input className={`${Styles.input} border rounded p-[7px] text-xs font-semibold text-gray-600  `} onChange={handler} value={value} name={name} type={type} />
         </div>
     )
 }

@@ -11,7 +11,7 @@ const CategorySelector = ({handle, input}) => {
                 {
                 categories?.map(ct => {
                     const subCategories = ct.subCategories?.map(sub => {
-                        return <button onClick={()=>{handle([sub.parent, sub])}} className={`${input.categories.find(ct => ct.name === sub.name) && ' bg-green-400'} text-xs border cursor-pointer p-1 rounded`} key={sub.id}>{sub.name}</button>
+                        return <button onClick={()=>{handle([sub.parent, sub])}} className={`${input.categories.find(ct => ct.name === sub.name) && ' bg-blue-500 text-white'} text-xs border cursor-pointer p-1 rounded font-bold`} key={sub.id}>{sub.name}</button>
                     }) || []
                     
                     return (

@@ -1,6 +1,7 @@
 'use client'
 
 
+import { HeaderAdmin } from '@/app/components/admin/filesComponents';
 import MainContainer from '@/app/helpers/containers/MainContainer';
 import { useCategoriesStore } from '@/app/store/categories.store';
 import { useProductsStore } from '@/app/store/products.store';
@@ -30,7 +31,7 @@ const AdminMainSection = () => {
 
     return (
     <MainContainer>
-        <h2 className="text-2xl font-bold">Main Admin Section</h2>
+        <HeaderAdmin title={"Menu Principal"}/>
         <div className="grid grid-cols-3 gap-4 w-full h-full mt-4">
             {/* Columna 1 */}
             <div className="flex flex-col gap-2">
