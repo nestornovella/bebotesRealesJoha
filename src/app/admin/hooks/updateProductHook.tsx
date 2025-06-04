@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 const useUpdateProduct = () => {
 
     const { products } = useProductsStore()
-    
+
     const [input, setInput] = useState<Product>({
         name: '',
         price: 0,
@@ -17,7 +17,8 @@ const useUpdateProduct = () => {
         description: '',
         categories: [],
         parentId: null,
-        parent: null
+        parent: null,
+        subProduct: []
     })
 
     function setParent(product) {
@@ -55,28 +56,43 @@ const useUpdateProduct = () => {
         setInput(prev => ({ ...prev, categories: category }))
     }
 
-    function findProduct(id: string) {
-        const productFound = products.find(pr => pr.id === id)
 
+    function findRecursive(products, id) {
+        for (const pr of products) {
+            if (pr.id === id) {
+                return pr;
+            }
+
+            if (pr.subProduct && pr.subProduct.length > 0) {
+                const found = findRecursive(pr.subProduct, id);
+                if (found) return found;
+            }
+        }
+
+        return null; // por si no lo encuentra
+    }
+    function findProduct(id: string) {
+
+        const productFound = findRecursive(products, id)
         productFound && setInput(prev => ({ ...prev, ...productFound }))
     }
 
     async function submit() {
-            try {
-                showToast('creando producto', 'info')
-                const { data } = await axios.put('/api/products', input)
-                if (data.error) throw new Error(data.response)
-                showToast('Producto creado con exito', 'success')
-            } catch (error) {
-                if (isAxiosError(error)) {
-                    console.log('error de axios:', error)
-                    showToast('Error de sistema', 'error')
-                } else if (error instanceof Error) {
-                    showToast(error.message, 'error')
-                    console.log(error.message)
-                }
+        try {
+            showToast('creando producto', 'info')
+            const { data } = await axios.put('/api/products', input)
+            if (data.error) throw new Error(data.response)
+            showToast('Producto creado con exito', 'success')
+        } catch (error) {
+            if (isAxiosError(error)) {
+                console.log('error de axios:', error)
+                showToast('Error de sistema', 'error')
+            } else if (error instanceof Error) {
+                showToast(error.message, 'error')
+                console.log(error.message)
             }
         }
+    }
 
     return {
         findProduct,

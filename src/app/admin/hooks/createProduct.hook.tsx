@@ -47,6 +47,9 @@ const useCreateProductHook = () => {
         });
     }
 
+    function deletParent() {
+        setInput(prev => ({ ...prev, parentId: null, parent: null }))
+    }
 
     function handleCategory(category:Category[]) {
         setInput(prev => ({...prev, categories:category}))
@@ -76,7 +79,8 @@ const useCreateProductHook = () => {
         setParent,
         handleCategory,
         submit,
-        setImage
+        setImage,
+        deletParent
     }
 }
 export default useCreateProductHook;

@@ -42,72 +42,71 @@ export async function GET() {
         }
     }
 }
-
 export async function POST(request: NextRequest) {
     try {
+        const body = await request.json();
+        const { image, name, price, categories, parentId } = body;
 
-        const body = await request.json()
-        delete body.parent
-
-        const { image, name, price, categories, parentId } = body
-
-        if (!image || !price || !name) throw new Error("faltan parametros obligatorios nombre precio o imagen")
-
+        if (!image || !price || !name)
+            throw new Error("Faltan parámetros obligatorios: nombre, precio o imagen");
 
         const newProduct = await prismaClient.product.create({
             data: {
-                ...body,
+                name,
+                image,
+                price,
+                ...(body.length && { length: body.length }),
+                ...(body.weight && { weight: body.weight }),
+                ...(body.description && { description: body.description }),
                 ...(categories?.length && {
                     categories: {
                         connect: categories.map((cat: Category) => ({ id: cat.id })),
                     },
                 }),
                 ...(parentId && {
-                    parent: { connect: { id: parentId } }
-                }
-                )
+                    parent: { connect: { id: parentId } },
+                }),
             },
         });
 
-        if (!newProduct) throw new Error("no se pudo crear el producto")
+        if (!newProduct) throw new Error("No se pudo crear el producto");
 
-        return response<string>("ok", "Producto creado con exito")
-
-
+        return response<string>("ok", "Producto creado con éxito");
     } catch (error) {
         if (error instanceof Error) {
-            return response<String>("error", error.message)
+            return response<string>("error", error.message);
         }
     }
 }
+
 export async function PUT(request: NextRequest) {
-  try {
-    
-    const {id, name, image, categories, length, price, weight, active, description } = await request.json() as Product
-    const update = await prismaClient.product.update({
-      where: { id: id },
-      data: {
-        name,
-        image,
-        length,
-        price,
-        weight,
-        active,
-        description,
-        categories: {
-          set: categories.map((ct) => ({ id: ct.id })),
-        },
-      },
-    });
+    try {
 
-    if (!update) throw new Error('no se logró actualizar el producto');
+        const { id, name, image, categories, length, price, weight, active, description } = await request.json() as Product
+        const update = await prismaClient.product.update({
+            where: { id: id },
+            data: {
+                name,
+                image,
+                length,
+                price,
+                weight,
+                active,
+                description,
+                categories: {
+                    set: categories.map((ct) => ({ id: ct.id })),
+                },
+            },
+        });
 
-    return response('ok', 'producto actualizado');
-  } catch (error) {
-    if (error instanceof Error) {
-      return response('error', error.message);
+        if (!update) throw new Error('no se logró actualizar el producto');
+
+        return response('ok', 'producto actualizado');
+    } catch (error) {
+        if (error instanceof Error) {
+            return response('error', error.message);
+        }
+        return response('error', 'error desconocido');
     }
-    return response('error', 'error desconocido');
-  }
 }
 
