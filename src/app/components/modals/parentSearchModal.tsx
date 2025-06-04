@@ -66,7 +66,7 @@ const ParentSearchModal = ({ label, model, handler, close }: { label: string, mo
                         <h2 className='text-sm'>Ups no hay nada por aqui....</h2>
                     </div>
                     :
-                    <div>
+                    <div className='max-h-[70vh] overflow-scroll'>
                         {
                             elements.map((el) => {
                                 return cardModel[model](el)
