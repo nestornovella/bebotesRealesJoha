@@ -7,7 +7,7 @@ const ProductsRender = ({ subCategory }) => {
     const { products } = useProductsStore()
 
     return (
-        <div className='grid xl:grid-cols-4 gap-4 w-full'>
+        <div className='grid md:grid-cols-2 xl:grid-cols-4 gap-4 w-full'>
             {
                 products.length > 0 && products.filter(prod => { return prod.categories[0].name === subCategory.name }).map(pr => {
                     return (
