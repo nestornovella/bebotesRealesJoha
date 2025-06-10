@@ -2,7 +2,7 @@
 
 .first {
     background-color: rgb(73, 71, 71);
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -13,7 +13,7 @@
 
 .second {
     background-color: rgb(192, 182, 182);
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;

@@ -30,8 +30,8 @@ const Detail = ({ product }: { product: Product }) => {
                     }
                     <div className='px-4'>
                         <div className='flex gap-2 items-center justify-between'>
-                            <div className='p-1 px-2 w-fit  overflow-hidden rounded-xl'>
-                                <h1 className='text-black font-bold overflow-hidden'>precio ${product.price}</h1>
+                            <div className='p-1 px-2 w-fit text-xl  overflow-hidden rounded-xl'>
+                                <h1 className='text-black text-xl  font-bold overflow-hidden'>precio ${product.price}</h1>
                             </div>
                             <div className='p-1 px-2   overflow-hidden  flex justify-center w-fit items-center gap-2'>
                                 <IoCart className='text-black size-7' />
@@ -82,7 +82,7 @@ const Detail = ({ product }: { product: Product }) => {
 
                             <div>
                                 <p>Ingrese la cantidad Que desea agregar al carrito</p>
-                                <div className='flex gap-2'>
+                                <div className='flex gap-2 my-4 mb-15'>
                                     <input type="number" className='border w-full p-2 font-semibold' placeholder='ingrese un valor si la cantidad es mayor a las digitadas' />
                                     <button className='border p-1'>Agregar al carrito</button>
                                 </div>
