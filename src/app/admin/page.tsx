@@ -14,6 +14,7 @@ const AdminPage = () => {
     },[])
     
     return (
+        
         <AdminMainSection/>
     );
 };

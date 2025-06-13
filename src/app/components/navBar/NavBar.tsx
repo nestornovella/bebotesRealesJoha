@@ -9,6 +9,7 @@ import useToogleOpenHook from '@/app/admin/hooks/toogleHooks';
 
 const NavBar = () => {
 
+    
     const { push } = useRouter()
     const { close, toogleOpen, status } = useToogleOpenHook()
     return (
