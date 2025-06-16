@@ -18,7 +18,7 @@ const Detail = ({ product }: { product: Product }) => {
 
         for (let i = 1; i <= 20; i++) {
             buttons.push(
-                <button onClick={() => { addToCart(product.id as string, product, i) }} key={i} className='p-2 py-3 border text-2xl font-bold hover:border-red-600 hover:bg-blue-400 hover:text-white cursor-pointer'>{i}</button>
+                <button onClick={() => { addToCart(product.id as string, product, i) }} key={i} className='p-2 py-3 shadow text-gray-500 text-2xl font-bold hover:border-red-600 hover:bg-blue-400 hover:text-white cursor-pointer'>{i}</button>
             )
         }
 
@@ -40,7 +40,7 @@ const Detail = ({ product }: { product: Product }) => {
                     <div className='px-4'>
                         <div className='flex gap-2 items-center justify-between'>
                             <div className='p-1 px-2 w-fit text-xl  overflow-hidden rounded-xl'>
-                                <h1 className='text-black text-xl  font-bold overflow-hidden'>precio ${product.price}</h1>
+                                <h1 className='text-black text-xl  font-bold overflow-hidden'> ${product.price}</h1>
                             </div>
                             <div className='p-1 px-2   overflow-hidden  flex justify-center w-fit items-center gap-2'>
                                 <IoCart className='text-black size-7' />

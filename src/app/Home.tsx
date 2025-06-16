@@ -8,6 +8,7 @@ import { useProductsStore } from './store/products.store';
 import { useCategoriesStore } from './store/categories.store';
 import MainRender from './components/render/mainRender';
 import { useAuthStore } from './store/auth.store';
+import Footer from './components/footer/footer';
 
 const Home = () => {
 
@@ -22,6 +23,7 @@ const Home = () => {
     return (
         <MainContainer>
             <MainRender />
+            <Footer/>
         </MainContainer>
     );
 };

@@ -11,16 +11,14 @@ const NavBar = () => {
 
     return (
         <div className='fixed w-full flex h-[70px] justify-between items-centerpx-3 md:px-20 xl:px-36 2xl:px-48 z-[100] backdrop-blur-3xl'>
-            <div onClick={() => { push('/') }} className='relative border cursor-pointer rounded p-2 bg-pink-500 text-white font-bold flex items-center justify-center'>
-                <h2 className='text-2xl '>LOGO</h2>
+            <div onClick={() => { push('/') }} className=' flex-col p size-[70px] relative rounded-full border cursor-pointer  p-9 bg-black text-white font-bold flex items-center justify-center'>
+                <h2 className='text-sm '>Bebes</h2>
+                <p className='text-sm'>Reales</p>
             </div>
 
+            
             <div className='p-2 flex justify-center items-center cursor-pointer'>
-                <RiAdminFill onClick={() => { push('/admin') }} className='size-10 text-green-500' />
-            </div>
-
-            <div className='p-2 flex justify-center items-center cursor-pointer'>
-                <FaBagShopping onClick={() => { push('/carrito') }} className='size-10 text-pink-500' />
+                <FaBagShopping onClick={() => { push('/carrito') }} className='size-10 text-blue-500' />
             </div>
         </div>
 
