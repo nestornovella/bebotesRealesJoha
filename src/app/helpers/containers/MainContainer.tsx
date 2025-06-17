@@ -17,7 +17,7 @@ function Transition() {
 
 const MainContainer = ({ children, transition = true}) => {
     return (
-        <div className={`px-3 md:px-20 xl:px-36 2xl:px-48 py-[90px] h-screen w-screen `}>
+        <div className={`px-3 md:px-20 xl:px-36 2xl:px-48 py-[90px] min-h-screen w-screen `}>
             {
                 transition &&
                 <Transition />

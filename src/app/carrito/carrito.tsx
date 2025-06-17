@@ -72,7 +72,7 @@ const Carrito = () => {
                             <h2 className="text-3xl">{total}</h2>
                         </div>
 
-                        <div className='flex justify-center my-4'>
+                        <div className='flex justify-center py-4'>
                             <button onClick={() => {
                                 window.location.href = link as string
                                 clearCart()
