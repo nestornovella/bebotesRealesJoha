@@ -140,7 +140,8 @@ exports.Prisma.ProductScalarFieldEnum = {
 
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
-  totalAmount: 'totalAmount'
+  totalAmount: 'totalAmount',
+  status: 'status'
 };
 
 exports.Prisma.OrderItemScalarFieldEnum = {
@@ -166,7 +167,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.StatusOrder = exports.$Enums.StatusOrder = {
+  Success: 'Success',
+  Pending: 'Pending',
+  Canceled: 'Canceled'
+};
 
 exports.Prisma.ModelName = {
   Category: 'Category',

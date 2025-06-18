@@ -1,10 +1,12 @@
+import MainContainer from '@/app/helpers/containers/MainContainer';
 import React from 'react';
+import OrdersSection from './orders';
 
 const OrdersMainSection = () => {
     return (
-        <div>
-            
-        </div>
+        <MainContainer>
+            <OrdersSection/>
+        </MainContainer>
     );
 };
 

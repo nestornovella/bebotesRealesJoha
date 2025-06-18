@@ -35,6 +35,24 @@ export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>
 export type OrderItem = $Result.DefaultSelection<Prisma.$OrderItemPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const StatusOrder: {
+  Success: 'Success',
+  Pending: 'Pending',
+  Canceled: 'Canceled'
+};
+
+export type StatusOrder = (typeof StatusOrder)[keyof typeof StatusOrder]
+
+}
+
+export type StatusOrder = $Enums.StatusOrder
+
+export const StatusOrder: typeof $Enums.StatusOrder
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -3650,16 +3668,19 @@ export namespace Prisma {
   export type OrderMinAggregateOutputType = {
     id: string | null
     totalAmount: number | null
+    status: $Enums.StatusOrder | null
   }
 
   export type OrderMaxAggregateOutputType = {
     id: string | null
     totalAmount: number | null
+    status: $Enums.StatusOrder | null
   }
 
   export type OrderCountAggregateOutputType = {
     id: number
     totalAmount: number
+    status: number
     _all: number
   }
 
@@ -3675,16 +3696,19 @@ export namespace Prisma {
   export type OrderMinAggregateInputType = {
     id?: true
     totalAmount?: true
+    status?: true
   }
 
   export type OrderMaxAggregateInputType = {
     id?: true
     totalAmount?: true
+    status?: true
   }
 
   export type OrderCountAggregateInputType = {
     id?: true
     totalAmount?: true
+    status?: true
     _all?: true
   }
 
@@ -3777,6 +3801,7 @@ export namespace Prisma {
   export type OrderGroupByOutputType = {
     id: string
     totalAmount: number
+    status: $Enums.StatusOrder
     _count: OrderCountAggregateOutputType | null
     _avg: OrderAvgAggregateOutputType | null
     _sum: OrderSumAggregateOutputType | null
@@ -3801,6 +3826,7 @@ export namespace Prisma {
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     totalAmount?: boolean
+    status?: boolean
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
@@ -3808,19 +3834,22 @@ export namespace Prisma {
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     totalAmount?: boolean
+    status?: boolean
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     totalAmount?: boolean
+    status?: boolean
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectScalar = {
     id?: boolean
     totalAmount?: boolean
+    status?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "totalAmount", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "totalAmount" | "status", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
@@ -3836,6 +3865,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       totalAmount: number
+      status: $Enums.StatusOrder
     }, ExtArgs["result"]["order"]>
     composites: {}
   }
@@ -4262,6 +4292,7 @@ export namespace Prisma {
   interface OrderFieldRefs {
     readonly id: FieldRef<"Order", 'String'>
     readonly totalAmount: FieldRef<"Order", 'Float'>
+    readonly status: FieldRef<"Order", 'StatusOrder'>
   }
     
 
@@ -5853,7 +5884,8 @@ export namespace Prisma {
 
   export const OrderScalarFieldEnum: {
     id: 'id',
-    totalAmount: 'totalAmount'
+    totalAmount: 'totalAmount',
+    status: 'status'
   };
 
   export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -5932,6 +5964,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusOrder'
+   */
+  export type EnumStatusOrderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusOrder'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusOrder[]'
+   */
+  export type ListEnumStatusOrderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusOrder[]'>
     
 
 
@@ -6095,12 +6141,14 @@ export namespace Prisma {
     NOT?: OrderWhereInput | OrderWhereInput[]
     id?: UuidFilter<"Order"> | string
     totalAmount?: FloatFilter<"Order"> | number
+    status?: EnumStatusOrderFilter<"Order"> | $Enums.StatusOrder
     orderItems?: OrderItemListRelationFilter
   }
 
   export type OrderOrderByWithRelationInput = {
     id?: SortOrder
     totalAmount?: SortOrder
+    status?: SortOrder
     orderItems?: OrderItemOrderByRelationAggregateInput
   }
 
@@ -6110,12 +6158,14 @@ export namespace Prisma {
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     totalAmount?: FloatFilter<"Order"> | number
+    status?: EnumStatusOrderFilter<"Order"> | $Enums.StatusOrder
     orderItems?: OrderItemListRelationFilter
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
     totalAmount?: SortOrder
+    status?: SortOrder
     _count?: OrderCountOrderByAggregateInput
     _avg?: OrderAvgOrderByAggregateInput
     _max?: OrderMaxOrderByAggregateInput
@@ -6129,6 +6179,7 @@ export namespace Prisma {
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Order"> | string
     totalAmount?: FloatWithAggregatesFilter<"Order"> | number
+    status?: EnumStatusOrderWithAggregatesFilter<"Order"> | $Enums.StatusOrder
   }
 
   export type OrderItemWhereInput = {
@@ -6344,40 +6395,47 @@ export namespace Prisma {
   export type OrderCreateInput = {
     id?: string
     totalAmount?: number
+    status?: $Enums.StatusOrder
     orderItems?: OrderItemCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
     id?: string
     totalAmount?: number
+    status?: $Enums.StatusOrder
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
     id?: string
     totalAmount?: number
+    status?: $Enums.StatusOrder
   }
 
   export type OrderUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
   }
 
   export type OrderUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
   }
 
   export type OrderItemCreateInput = {
@@ -6712,9 +6770,17 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumStatusOrderFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusOrder | EnumStatusOrderFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusOrderFilter<$PrismaModel> | $Enums.StatusOrder
+  }
+
   export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
     totalAmount?: SortOrder
+    status?: SortOrder
   }
 
   export type OrderAvgOrderByAggregateInput = {
@@ -6724,15 +6790,27 @@ export namespace Prisma {
   export type OrderMaxOrderByAggregateInput = {
     id?: SortOrder
     totalAmount?: SortOrder
+    status?: SortOrder
   }
 
   export type OrderMinOrderByAggregateInput = {
     id?: SortOrder
     totalAmount?: SortOrder
+    status?: SortOrder
   }
 
   export type OrderSumOrderByAggregateInput = {
     totalAmount?: SortOrder
+  }
+
+  export type EnumStatusOrderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusOrder | EnumStatusOrderFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusOrderWithAggregatesFilter<$PrismaModel> | $Enums.StatusOrder
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusOrderFilter<$PrismaModel>
+    _max?: NestedEnumStatusOrderFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7084,6 +7162,10 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
+  export type EnumStatusOrderFieldUpdateOperationsInput = {
+    set?: $Enums.StatusOrder
+  }
+
   export type OrderItemUpdateManyWithoutOrderNestedInput = {
     create?: XOR<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput> | OrderItemCreateWithoutOrderInput[] | OrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutOrderInput | OrderItemCreateOrConnectWithoutOrderInput[]
@@ -7320,6 +7402,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusOrderFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusOrder | EnumStatusOrderFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusOrderFilter<$PrismaModel> | $Enums.StatusOrder
+  }
+
+  export type NestedEnumStatusOrderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusOrder | EnumStatusOrderFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusOrder[] | ListEnumStatusOrderFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusOrderWithAggregatesFilter<$PrismaModel> | $Enums.StatusOrder
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusOrderFilter<$PrismaModel>
+    _max?: NestedEnumStatusOrderFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -7755,11 +7854,13 @@ export namespace Prisma {
   export type OrderCreateWithoutOrderItemsInput = {
     id?: string
     totalAmount?: number
+    status?: $Enums.StatusOrder
   }
 
   export type OrderUncheckedCreateWithoutOrderItemsInput = {
     id?: string
     totalAmount?: number
+    status?: $Enums.StatusOrder
   }
 
   export type OrderCreateOrConnectWithoutOrderItemsInput = {
@@ -7814,11 +7915,13 @@ export namespace Prisma {
   export type OrderUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
   }
 
   export type OrderUncheckedUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
   }
 
   export type ProductUpsertWithoutOrderItemsInput = {
