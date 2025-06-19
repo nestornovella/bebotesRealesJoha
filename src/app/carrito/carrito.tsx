@@ -8,7 +8,7 @@ import { CgMathMinus, CgMathPlus } from 'react-icons/cg';
 import { ImWhatsapp } from 'react-icons/im';
 import { IoSadOutline } from 'react-icons/io5';
 import useCarrito from '../hooks/carrito.hook';
-import useOrderHook from '../hooks/order.hook';
+import useOrderHook from '../admin/hooks/order.hook';
 import useWhatsappHook from '../hooks/whatsapp.hook';
 
 

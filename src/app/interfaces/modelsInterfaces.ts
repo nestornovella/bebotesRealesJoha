@@ -32,7 +32,8 @@ export interface Product {
 export interface Order {
   id: string;
   totalAmount: number;
-  orderItems?: OrderItem[];
+  orderItems: OrderItem[];
+  status: 'Success' |'Pending'|'Canceled'
 }
 
 export interface OrderItem {
@@ -43,6 +44,6 @@ export interface OrderItem {
   orderId: string;
   productId: string;
 
-  order?: Order;
-  product?: Product;
+  order: Order;
+  product: Product;
 }

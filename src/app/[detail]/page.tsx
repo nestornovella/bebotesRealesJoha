@@ -1,5 +1,6 @@
 import React from 'react';
 import DetailMainSection from './detailMainSection';
+import Footer from '../components/footer/footer';
 
 const DetailPage = async ({params}) => {
 
@@ -9,6 +10,7 @@ const DetailPage = async ({params}) => {
     return (
         <div>
             <DetailMainSection productId={detail}/>
+            <Footer/>
         </div>
     );
 };
