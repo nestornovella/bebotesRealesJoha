@@ -13,7 +13,6 @@ const useOrderHook = () => {
             const cartProducts = Object.values(cart)
             const response = await axios.post('/api/orders', { items: cartProducts })
             setOrder(response.data.response.id)
-
             return response.data.response.id
         } catch (error) {
             if (error instanceof Error)

@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { response } from "@/app/api/helpers/helpers";
 import { Order } from "@/app/interfaces/modelsInterfaces";
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }) {
   try {
     const id = params.id;
 
