@@ -9,6 +9,8 @@ export async function GET() {
 
         await prismaClient.product.deleteMany()
         await prismaClient.category.deleteMany()
+        await prismaClient.order.deleteMany()
+
         //categorias
         const juguetes = await prismaClient.category.create({
             data: {
