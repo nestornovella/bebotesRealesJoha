@@ -60,6 +60,7 @@ const useCreateProductHook = () => {
             showToast('creando producto', 'info')
             const { data } = await axios.post('/api/products', input)
             if (data.error) throw new Error(data.response)
+                console.log(data)
             showToast('Producto creado con exito', 'success')
         } catch (error) {
             if (isAxiosError(error)) {
