@@ -23,12 +23,12 @@ const AuthSection = () => {
     }
 
     return (
-        <div className=' pt-20 flex flex-col items-center justify-center'>
+        <div className=' pt-20 flex gap-2 flex-col items-center justify-center'>
             <HeaderAdmin title={'Pass Access'}/>
 
-            <Input handler={handleInput} label={'PassWord'} name={'pass'}  type='password' value={input.pass}/>
+            <Input handler={handleInput} label={'Password'} name={'pass'}  type='password' value={input.pass}/>
 
-            <ButtonBlue action={submit} label={'Ingresar'} />
+            <ButtonBlue action={submit} label={'Ingresar'} addClass='p-2 ' />
         </div>
     );
 };
