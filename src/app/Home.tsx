@@ -13,7 +13,7 @@ const Home = () => {
 
     useEffect(() => {
         initialCharge()
-        removePass()
+        //removePass()
     }, [])
 
     return (

@@ -29,7 +29,7 @@ function useWhatsappHook() {
         const total = Object.values<CartItem>(cart).reduce((acc, pr) => acc + pr.product.price * pr.quantity, 0).toFixed(2);
         template += `\n\nTotal a abonar: $ ${total}`;
 
-        return `https://api.whatsapp.com/send?phone=+540111525420570&text=${encodeURIComponent(template)}`;
+        return `https://api.whatsapp.com/send?phone=+540111554771827&text=${encodeURIComponent(template)}`;
     }
 
 
