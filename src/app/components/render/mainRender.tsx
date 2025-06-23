@@ -17,9 +17,9 @@ const MainRender = () => {
                         <div key={ct.id}>
                             <div className='my-7'>
                                 <div className='  w-fit text-2xl font-bold text-white gap-2 p-2 rounded-lg flex items-center'
-                                    style={{ backgroundColor: getPastelColorFromString(ct.name) }}
+                                    style={{ backgroundColor: getPastelColorFromString(ct?.name) }}
                                 >
-                                    <h2  >{ct.name} </h2>
+                                    <h2  >{ct?.name} </h2>
                                     <MdOutlineLocalPlay className='size-6' />
                                 </div>
                                 {
