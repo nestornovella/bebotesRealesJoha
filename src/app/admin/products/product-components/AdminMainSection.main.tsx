@@ -72,6 +72,9 @@ const AdminMainSection = () => {
             <button onClick={() => route('/admin/categories')} className={className}>
               Crear Categorías
             </button>
+            <button onClick={() => route('/admin/categories/delete')} className={className}>
+              Eliminar Categorias
+            </button>
           </div>
 
           {/* Columna 3 */}
