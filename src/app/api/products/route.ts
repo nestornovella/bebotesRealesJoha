@@ -20,6 +20,7 @@ export async function GET() {
                             parent: true
                         }
                     },
+                    
                 }
             })
 
@@ -67,6 +68,9 @@ export async function POST(request: NextRequest) {
                     parent: { connect: { id: parentId } },
                 }),
             },
+            include:{
+                subProduct:true
+            }
         });
 
         if (!newProduct) throw new Error("No se pudo crear el producto");

@@ -10,11 +10,11 @@ import { MdDeleteForever } from 'react-icons/md';
 const Detail = ({ product }: { product: Product }) => {
 
     const { addToCart, cart, deleteProduct } = useCartStore()
-    const {push} = useRouter()
+    const { push } = useRouter()
     function addButtons() {
         const buttons: React.ReactElement<HTMLButtonElement>[] = []
 
-        console.log(cart)
+        console.log(product, '===')
 
         for (let i = 1; i <= 20; i++) {
             buttons.push(
@@ -54,6 +54,27 @@ const Detail = ({ product }: { product: Product }) => {
                             <Image alt='' priority src={product.image} width={500} height={500} quality={100} />
                         </div>
 
+                        <div className='flex gap-2'>
+                            {
+
+                                product?.subProduct?.map(
+                                    pr => {
+                                        return <div key={pr.id} onClick={() => { push(`/${pr.id}`) }}>
+                                            <Image alt='' src={pr.image} width={70} height={70} quality={70} />
+                                        </div>
+
+                                    }
+                                )
+                            }
+
+                            {
+                                product.parent &&
+                                   <div onClick={() => { push(`/${product.parentId}`) }}>
+                                    <Image alt='' src={product?.parent?.image as string} width={70} height={70} quality={70} />
+                                </div>
+                            }
+                        </div>
+
                         <div>
                             <h1 className='font-semibold'>{product.name}</h1>
                         </div>
@@ -82,7 +103,7 @@ const Detail = ({ product }: { product: Product }) => {
                                         return bt
                                     })
                                 }
-                                <div onClick={()=>{deleteProduct(product.id as string)}} className='p-1 px-2   overflow-hidden bg-black  flex justify-center w-full items-center gap-2 cursor-pointer'>
+                                <div onClick={() => { deleteProduct(product.id as string) }} className='p-1 px-2   overflow-hidden bg-black  flex justify-center w-full items-center gap-2 cursor-pointer'>
                                     <MdDeleteForever className='size-7 text-red-500' />
                                     <IoCart className='text-white size-7' />
                                     <p className='text-white font-bold overflow-hidden'>{cart[product.id as string]?.quantity}</p>
@@ -94,15 +115,15 @@ const Detail = ({ product }: { product: Product }) => {
                                 <p>Ingrese la cantidad Que desea agregar al carrito</p>
                                 <div className='flex gap-2 my-4 mb-10'>
                                     <input ref={ref} type="number" className='border w-full p-2 font-semibold' placeholder='ingrese un valor si la cantidad es mayor a las digitadas' />
-                                    <button onClick={()=>{
+                                    <button onClick={() => {
                                         addToCart(product.id as string, product, Number(ref.current?.value))
-                                        if(ref.current) ref.current.value = ''
-                                        }} className='border p-1'>Agregar al carrito</button>
+                                        if (ref.current) ref.current.value = ''
+                                    }} className='border p-1'>Agregar al carrito</button>
                                 </div>
 
                                 <div className='flex gap-2 items-center'>
                                     <p>Si desea modificar las cantidades o quitar productos puede hacerlo desde el </p>
-                                    <button onClick={()=>{push('/carrito')}} className='border rounded p-2 cursor-pointer hover:bg-blue-400 hover:text-white font-semibold'>carrito</button>
+                                    <button onClick={() => { push('/carrito') }} className='border rounded p-2 cursor-pointer hover:bg-blue-400 hover:text-white font-semibold'>carrito</button>
                                 </div>
                             </div>
 

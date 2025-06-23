@@ -13,8 +13,23 @@ const useFindProduct = () => {
     },[])
 
     function findProduct(id:string){
-        console.log(products)
-        const found = products.find(pr => pr.id === id)
+        
+        let found: null | Product = null
+
+        for(const product of products){
+            if(product.id === id){
+                found = product
+            }
+
+            if(product.subProduct?.length){
+                product.subProduct.forEach(pr => {
+                    if(pr.id === id){
+                        found = pr
+                    }
+                })
+            }
+        }
+        
         console.log(found, 'founded')
         if(found){
             setProduct(found)
