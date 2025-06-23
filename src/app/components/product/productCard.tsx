@@ -17,7 +17,7 @@ export const getPastelColorFromString = (str: string) => {
 };
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const categoryName = product.categories[0]?.name || 'default';
+  const categoryName = product.categories[product.categories.length -1]?.name || 'default';
   const pastelColor = getPastelColorFromString(categoryName);
   const { push } = useRouter()
 

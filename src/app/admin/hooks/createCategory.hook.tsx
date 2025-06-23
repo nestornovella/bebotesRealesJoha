@@ -1,4 +1,5 @@
 import { showToast } from '@/app/helpers/tostify';
+import useMainChargeHook from '@/app/hooks/mainCharge.hook';
 import { Category } from '@/app/interfaces/modelsInterfaces';
 import axios, { isAxiosError } from 'axios';
 import React, { useState } from 'react';
@@ -11,6 +12,8 @@ const useCreateCategoriesHook = () => {
         parentId: null,
         parent:null
     })
+
+    const {recharge} = useMainChargeHook()
 
     function handlerInput(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value
@@ -41,6 +44,7 @@ const useCreateCategoriesHook = () => {
             if (data.ok) {
                 setinput(prev => ({ ...prev, name: '' }))
                 showToast('Se ha creado una nueva categoria', 'success')
+                recharge()
             }
         } catch (error) {
             if (isAxiosError(error)) {
@@ -51,11 +55,28 @@ const useCreateCategoriesHook = () => {
             }
         }
     }
+
+    async function deleteCategory(id:string){
+        try {
+            const {data} = await axios.delete(`/api/categories/${id}`)
+            if(data.error) throw new Error('no se logro eliminar la categoria')
+            showToast('Categoria eliminada', 'success')
+            recharge()
+        } catch (error) {
+            if(error instanceof Error){
+                showToast(error.message, 'error')
+            }
+
+        }
+    }
+
+
     return {
         input,
         handlerInput,
         submit,
-        setParent
+        setParent,
+        deleteCategory
     }
 };
 
