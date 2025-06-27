@@ -3,43 +3,51 @@ import { response } from "../helpers/helpers";
 import { prismaClient } from "../helpers/prismaClient";
 import { NextRequest } from "next/server";
 
-
-
-
+type ProductNode = Omit<Product, "parent" | "subProduct"> & {
+    parent?: Partial<ProductNode> | null;
+    categories: Category[];
+    subProduct: ProductNode[];
+};
 
 
 export async function GET() {
     try {
-        async function buildTree(productId: string | null = null) {
-            const products = await prismaClient.product.findMany({
-                where: { parentId: productId },
-                include: {
-                    parent: true,
-                    categories: {
-                        include: {
-                            parent: true
-                        }
+        const allProducts = await prismaClient.product.findMany({
+            include: {
+                parent: true,
+                categories: {
+                    include: {
+                        parent: true,
                     },
-                    
-                }
-            })
+                },
+            },
+        });
 
-            return Promise.all(products.map(async (product) => (
-                {
-                    ...product,
-                    subProduct: await buildTree(product.id)
-                }
-            )))
+        const productMap = new Map<string, ProductNode>();
 
+        for (const prod of allProducts) {
+            productMap.set(prod.id, {
+                ...prod,
+                subProduct: [],
+            });
         }
-        const newProductTree = await buildTree()
 
-        return response<Product[]>("ok", newProductTree)
+        const tree: ProductNode[] = [];
 
+        for (const prod of allProducts) {
+            const node = productMap.get(prod.id)!;
+            if (prod.parentId) {
+                const parentNode = productMap.get(prod.parentId);
+                parentNode?.subProduct.push(node);
+            } else {
+                tree.push(node);
+            }
+        }
+
+        return response<ProductNode[]>("ok", tree);
     } catch (error) {
-
         if (error instanceof Error) {
-            return response<string>("error", error.message)
+            return response<string>("error", error.message);
         }
     }
 }
@@ -68,8 +76,8 @@ export async function POST(request: NextRequest) {
                     parent: { connect: { id: parentId } },
                 }),
             },
-            include:{
-                subProduct:true
+            include: {
+                subProduct: true
             }
         });
 

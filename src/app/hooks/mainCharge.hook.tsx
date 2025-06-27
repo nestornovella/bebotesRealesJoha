@@ -15,8 +15,7 @@ const useMainChargeHook = () => {
             info && showToast('cargando modelos, espere...', 'info')
             getCategories()
                 .then(response => {
-                    response && !products.length && getProducts()
-                    .then(response => {response && info && showToast('modelos cargados con exito', 'success')})
+                    response && !products.length && getProducts() 
                 })
         }
     }

@@ -1,4 +1,4 @@
-import React, { Ref, RefObject, useRef } from 'react';
+import React, { Ref, RefObject, useEffect, useRef } from 'react';
 import { Product } from '../interfaces/modelsInterfaces';
 import MainContainer from '../helpers/containers/MainContainer';
 import Image from 'next/image';
@@ -6,17 +6,26 @@ import { IoCart } from 'react-icons/io5';
 import { useCartStore } from '../store/cart.store';
 import { useRouter } from 'next/navigation';
 import { MdDeleteForever } from 'react-icons/md';
+import useFindProduct from '../hooks/products.hook';
+import useFindBrothers from '../admin/hooks/findProduct';
 
 const Detail = ({ product }: { product: Product }) => {
 
+    const { brothers, findBroters } = useFindBrothers()
     const { addToCart, cart, deleteProduct } = useCartStore()
     const { push } = useRouter()
     function addButtons() {
         const buttons: React.ReactElement<HTMLButtonElement>[] = []
 
-        console.log(product, '===')
 
-        for (let i = 1; i <= 20; i++) {
+        useEffect(() => {
+            if (product.parent?.id) {
+                findBroters(product.parent.id)
+            }
+        }, [])
+
+
+        for (let i = 1; i <= 10; i++) {
             buttons.push(
                 <button onClick={() => { addToCart(product.id as string, product, i) }} key={i} className='p-2 py-3 shadow text-gray-500 text-2xl font-bold hover:border-red-600 hover:bg-blue-400 hover:text-white cursor-pointer'>{i}</button>
             )
@@ -39,8 +48,8 @@ const Detail = ({ product }: { product: Product }) => {
                     }
                     <div className='px-4'>
                         <div className='flex gap-2 items-center justify-between'>
-                            <div className='p-1 px-2 w-fit text-xl  overflow-hidden rounded-xl'>
-                                <h1 className='text-black text-xl  font-bold overflow-hidden'> ${product.price}</h1>
+                            <div className='p-1 px-2 w-fit text-xl  overflow-hidden rounded-xl bg-black '>
+                                <p className='text-blue-400 m-0 p-0 text-5xl  font-bold overflow-hidden '> ${product.price}</p>
                             </div>
                             <div className='p-1 px-2   overflow-hidden  flex justify-center w-fit items-center gap-2'>
                                 <IoCart className='text-black size-7' />
@@ -54,23 +63,43 @@ const Detail = ({ product }: { product: Product }) => {
                             <Image alt='' priority src={product.image} width={500} height={500} quality={100} />
                         </div>
 
-                        <div className='flex gap-2'>
+                        <div className='cursor-pointer' >
+
                             {
+                                Array.isArray(product?.subProduct) &&
+                                product?.subProduct?.length > 0 &&
+                                <div key={product.id} className='flex gap-2 my-2'>
+                                    <div className={`border ${'scale-120'}`}>
+                                        <Image alt='' src={product.image } width={50} height={50} quality={70} />
+                                    </div>
+                                    {
+                                        product?.subProduct?.map(
+                                            pr => {
+                                                return <div  className={`border ${product.id === pr.id && 'scale-120'}`} key={pr.id} onClick={() => { push(`/${pr.id}`) }}>
+                                                    <Image alt='' src={pr.image} width={50} height={50} quality={70} />
+                                                </div>
 
-                                product?.subProduct?.map(
-                                    pr => {
-                                        return <div key={pr.id} onClick={() => { push(`/${pr.id}`) }}>
-                                            <Image alt='' src={pr.image} width={70} height={70} quality={70} />
-                                        </div>
-
+                                            }
+                                        )
                                     }
-                                )
+
+                                </div>
+
                             }
 
                             {
                                 product.parent &&
-                                   <div onClick={() => { push(`/${product.parentId}`) }}>
-                                    <Image alt='' src={product?.parent?.image as string} width={70} height={70} quality={70} />
+                                <div className='flex gap-2 my-2 ' >
+                                    <div className={`border-2 }`} onClick={() => { push(`/${product.parentId}`) }}>
+                                        <Image alt='' src={product?.parent?.image as string} width={50} height={50} quality={70} />
+                                    </div>
+                                    {
+                                        brothers?.map(pr => {
+                                            return <div key={pr.id} className={`border ${product.id === pr.id && 'scale-120'}`} onClick={() => { push(`/${pr.id}`) }}>
+                                                <Image alt='' src={pr.image as string} width={50} height={50} quality={70} />
+                                            </div>
+                                        })
+                                    }
                                 </div>
                             }
                         </div>

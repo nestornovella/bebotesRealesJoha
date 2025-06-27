@@ -3,38 +3,40 @@ import { response } from "../helpers/helpers";
 import { prismaClient } from "../helpers/prismaClient";
 import { NextRequest } from "next/server";
 
-
-
-
-
 export async function GET() {
+  try {
+    // Traemos todas las categorías de una sola vez
+    const allCategories = await prismaClient.category.findMany({
+      include: { parent: true },
+    });
 
-    try {
+    // Creamos una referencia rápida por ID
+    const categoryMap = new Map<string, Category & { subCategories: Category[] }>();
 
-        async function buildTree(parentId: string | null = null) {
-
-            const categories = await prismaClient.category.findMany({
-                where: {
-                    parentId: parentId
-                },
-                include: {
-                    parent: true
-                }
-            })
-
-            return Promise.all(categories.map(async (cat) => ({
-                ...cat,
-                subCategories: await buildTree(cat.id)
-            })))
-        }
-        const categories = await buildTree()
-        if(!categories) throw new Error('no se pudo acceder a las categorias (linea 30)')
-        return response<Category[]>("ok", categories)
-    } catch (error) {
-        if (error instanceof Error) {
-            return response<String>("error", error.message)
-        }
+    // Inicializamos el mapa con subcategorías vacías
+    for (const cat of allCategories) {
+      categoryMap.set(cat.id, { ...cat, subCategories: [] });
     }
+
+    const tree: (Category & { subCategories: Category[] })[] = [];
+
+    // Construimos el árbol
+    for (const cat of allCategories) {
+      const node = categoryMap.get(cat.id)!;
+      if (cat.parentId) {
+        const parentNode = categoryMap.get(cat.parentId);
+        parentNode?.subCategories.push(node);
+      } else {
+        tree.push(node); // Raíz del árbol
+      }
+    }
+
+    return response<Category[]>("ok", tree);
+  } catch (error) {
+    if (error instanceof Error) {
+      return response<string>("error", error.message);
+    }
+  }
 }
 
 

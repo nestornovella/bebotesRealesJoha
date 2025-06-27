@@ -1,4 +1,5 @@
 import { showToast } from '@/app/helpers/tostify';
+import useMainChargeHook from '@/app/hooks/mainCharge.hook';
 import { Category, Product } from '@/app/interfaces/modelsInterfaces';
 import { useProductsStore } from '@/app/store/products.store';
 import axios, { isAxiosError } from 'axios';
@@ -7,6 +8,7 @@ import React, { useState } from 'react';
 const useUpdateProduct = () => {
 
     const { products } = useProductsStore()
+    const {recharge} = useMainChargeHook()
 
     const [input, setInput] = useState<Product>({
         name: '',
@@ -79,10 +81,10 @@ const useUpdateProduct = () => {
 
     async function submit() {
         try {
-            showToast('creando producto', 'info')
             const { data } = await axios.put('/api/products', input)
             if (data.error) throw new Error(data.response)
-            showToast('Producto creado con exito', 'success')
+            recharge()
+            showToast('Producto actualizado con exito', 'success')
         } catch (error) {
             if (isAxiosError(error)) {
                 console.log('error de axios:', error)
