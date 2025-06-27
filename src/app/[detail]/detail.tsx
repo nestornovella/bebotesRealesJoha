@@ -48,9 +48,6 @@ const Detail = ({ product }: { product: Product }) => {
                     }
                     <div className='px-4'>
                         <div className='flex gap-2 items-center justify-between'>
-                            <div className='p-1 px-2 w-fit text-xl  overflow-hidden rounded-xl bg-black '>
-                                <p className='text-blue-400 m-0 p-0 text-5xl  font-bold overflow-hidden '> ${product.price}</p>
-                            </div>
                             <div className='p-1 px-2   overflow-hidden  flex justify-center w-fit items-center gap-2'>
                                 <IoCart className='text-black size-7' />
                                 <p className='text-black font-bold overflow-hidden'>{cart[product.id as string]?.quantity}</p>
@@ -104,6 +101,9 @@ const Detail = ({ product }: { product: Product }) => {
                             }
                         </div>
 
+                            <div  className='p-1 px-2 w-fit text-xl  overflow-hidden rounded-xl'>
+                                <p className='text-black m-0 p-0 text-4xl  font-bold overflow-hidden '> ${product.price}</p>
+                            </div>
                         <div>
                             <h1 className='font-semibold'>{product.name}</h1>
                         </div>
