@@ -162,7 +162,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Nestor Novella\\Desktop\\WORK SPACE\\JuguetesJoha\\src\\generated\\prisma",
+      "value": "C:\\Users\\javier\\Desktop\\bebotesRealesJoha\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -176,7 +176,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Nestor Novella\\Desktop\\WORK SPACE\\JuguetesJoha\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\javier\\Desktop\\bebotesRealesJoha\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -190,6 +190,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

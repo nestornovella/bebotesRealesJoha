@@ -42,11 +42,17 @@ model Product {
   orderItems OrderItem[]
 }
 
-model Order {
-  id          String @id @default(uuid()) @db.Uuid
-  totalAmount Float  @default(0)
+enum StatusOrder {
+  Success
+  Pending
+  Canceled
+}
 
-  orderItems OrderItem[]
+model Order {
+  id          String      @id @default(uuid()) @db.Uuid
+  totalAmount Float       @default(0)
+  status      StatusOrder @default(Pending)
+  orderItems  OrderItem[]
 }
 
 model OrderItem {
